@@ -91,3 +91,37 @@ const viewEmployee = async () => {
         firstAction();
     };
 }
+
+const viewDepartment = async () => {
+    console.log('View Department');
+    try {
+        let query = 'SELECT * FROM department';
+        connection.query(query, function (err, res) {
+            if (err) throw err;
+            let departmentArray = [];
+            res.forEach(department => departmentArray.push(department));
+            console.table(departmentArray);
+            firstAction();
+        });
+    } catch (err) {
+        console.log(err);
+        firstAction();
+    };
+}
+
+const viewRole = async () => {
+    console.log('Role View');
+    try {
+        let query = 'SELECT * FROM ROLE';
+        connection.query(query, function (err, res) {
+            if (err) throw err;
+            let roleArray = [];
+            res.forEach(role => roleArray.push(role));
+            console.table(roleArray);
+            firstAction();
+        });
+    } catch (err) {
+        console.log(err);
+        firstAction();
+    };
+}
