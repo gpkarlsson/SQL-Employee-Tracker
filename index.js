@@ -99,7 +99,7 @@ const viewDepartment = async () => {
         connection.query(query, function (err, res) {
             if (err) throw err;
             let departmentArray = [];
-            res.forEach(department => departmentArray.push(department));
+            res.forEach(department => departmentArray.push(department)); //check
             console.table(departmentArray);
             firstAction();
         });
@@ -182,3 +182,27 @@ const addEmployee = async () => {
         firstAction();
     };
 }
+
+const addDepartment = async () => {
+    try {
+        console.log('Add Department');
+        
+        let answer = await inquirer.prompt([
+            {
+                name: 'departmentName',
+                type: 'input',
+                message: 'What is the name of the new department?'
+            }
+        ]);
+
+        let result = connection.query('INSERT INTO department SET ?', {
+            department_name: answer.departmentName
+        });
+        console.log(`${answer.departmentName} successfully added to departments.\n`)
+        firstAction();
+    } catch (err) {
+        console.log(err);
+        firstAction();
+    }
+}
+
