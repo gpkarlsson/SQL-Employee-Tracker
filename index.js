@@ -125,3 +125,60 @@ const viewRole = async () => {
         firstAction();
     };
 }
+
+const addEmployee = async () => {
+    try {
+        console.log('Add Employee');
+        let roles = await connection.query('SELECT * FROM role');
+
+        let managers = await connection.query('SELECT * FROM employee');
+
+        let answer = await inquirer.prompt([
+            {
+                name: 'firstName',
+                type: 'input',
+                message: "What is the employee's first name?"
+            },
+            {
+                name: 'lastName',
+                type: 'input',
+                message: "What is the employee's last name?"
+            },
+            {
+                name: 'employeeRoleId',
+                type: 'list',
+                choices: roles.map((role) => {
+                    return {
+                        name: role.title,
+                        value: role.id
+                    }
+                }),
+                message: "What is the role id of this employee?"
+            },
+            {
+                name: 'employeeManagerId',
+                type: 'list',
+                choices: managers.map((manager) => {
+                    return {
+                        name: manager.first_name + ' ' + manager.last_name,
+                        value: manager.id
+                    }
+                }),
+                message: "What is the employee's manager id?"
+            }
+        ])
+
+        let result = await connection.query('INSERT INTO employee SET ?', {
+            first_name: answer.firstName,
+            last_name: answer.lastName,
+            role_id: (answer.employeeRoleId),
+            manager_id: (answer.employeeManagerId)
+        });
+        
+        console.log(`${answer.firstName} ${answer.lastName} added successfully.\n`);
+        firstAction();
+    } catch (err) {
+        console.log(err);
+        firstAction();
+    };
+}
