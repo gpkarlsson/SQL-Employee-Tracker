@@ -3,6 +3,7 @@ VALUES
   ('Management'),
   ('Accounting'),
   ('Quality Assurance');
+
 INSERT INTO employee_role (title, salary, department_id)
 VALUES 
   ('Director', 100000, 1),
@@ -12,6 +13,7 @@ VALUES
   ('Accountant', 50000, 2),
   ('Quality Engineer', 75000, 3),
   ('Testing Engineer', 70000, 3);
+  
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES 
   ('Jerry', 'Garcia', 1, NULL),
