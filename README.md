@@ -17,7 +17,7 @@ Using Node.js, Inquirer, and MySQL, this project gives business owners a conveni
 ## Usage
 
 ## Credits
-undefined
+Gordon Karlsson
 
 ## Installation
 Clone the repository, navigate to the directory where the repository was cloned, run `npm i`, then navigate to the "SQL-Assets" folder, log in to MySQL and run `source schema.sql` and then run `source seed.sql`. Navigate back to the root directory of the cloned repository, and run `node index.js` in the CLI.
