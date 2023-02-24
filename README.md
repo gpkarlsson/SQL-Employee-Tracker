@@ -1,8 +1,8 @@
  
 # SQL Employee Tracker
-[![Top Language](https://img.shields.io/github/languages/top/gpkarlsson/SQL-Employee-Tracker)
-[![Language Count](https://img.shields.io/github/languages/count/gpkarlsson/SQL-Employee-Tracker)
-[![MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![Top Language](https://img.shields.io/github/languages/top/gpkarlsson/SQL-Employee-Tracker)
+![Language Count](https://img.shields.io/github/languages/count/gpkarlsson/SQL-Employee-Tracker)
+![MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
 ## Description
