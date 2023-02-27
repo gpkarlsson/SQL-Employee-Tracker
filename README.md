@@ -15,6 +15,8 @@ Using Node.js, Inquirer, and MySQL, this project gives business owners a conveni
 - [Installation](#Installation)
 
 ## Usage
+Functionality Video
+https://drive.google.com/file/d/1cwatr1j5SnEt734guwN8QpDnaHhjrN6t/view
 
 ## Credits
 Gordon Karlsson
