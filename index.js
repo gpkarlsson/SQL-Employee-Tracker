@@ -39,6 +39,7 @@ const firstAction = async () => {
                 'View Departments',
                 'View Roles',
                 'Add Employees',
+                'Add Departments',
                 'Add Roles',
                 'Update Employee Role',
                 'Exit'
