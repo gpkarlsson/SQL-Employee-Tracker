@@ -1,12 +1,11 @@
-process.on('uncaughtException', function (err) {
-    console.log(err);
-  });
+// List of dependencies
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
 const consoleTable = require('console.table');
 const util = require('util');
 require('dotenv').config();
 
+// Create connetion to MySQL
 let connection = mysql.createConnection({
     host: 'localhost',
     port: 3306,
@@ -17,16 +16,18 @@ let connection = mysql.createConnection({
 
 connection.query = util.promisify(connection.query);
 
-
+// Initialize the application after establishing connection
 connection.connect(function (err) {
     if (err) throw (err);
     firstAction();
 });
 
+// Display welcome message in the console
 console.table(
     '\n====== EMPLOYEE TRACKER =======\n'
 )
 
+// Initial question to determine which action to do first
 const firstAction = async () => {
     try {
         let answer = await inquirer.prompt({
@@ -82,6 +83,7 @@ const firstAction = async () => {
     };
 }
 
+// View all employees
 const viewEmployee = async () => {
     try {
         console.log('View Employee');
@@ -99,7 +101,7 @@ const viewEmployee = async () => {
         firstAction();
     };
 }
-
+// View all departments
 const viewDepartment = async () => {
     console.log('View Department');
     try {
@@ -117,10 +119,11 @@ const viewDepartment = async () => {
     };
 }
 
+// View all roles
 const viewRole = async () => {
     console.log('Role View');
     try {
-        let query = 'SELECT * FROM ROLE';
+        let query = 'SELECT * FROM employee_role';
         connection.query(query, function (err, res) {
             if (err) throw err;
             let roleArray = [];
@@ -134,10 +137,11 @@ const viewRole = async () => {
     };
 }
 
+// Add a new employee
 const addEmployee = async () => {
     try {
         console.log('Add Employee');
-        let roles = await connection.query('SELECT * FROM role');
+        let roles = await connection.query('SELECT * FROM employee_role');
 
         let managers = await connection.query('SELECT * FROM employee');
 
@@ -191,6 +195,7 @@ const addEmployee = async () => {
     };
 }
 
+// Add a new department
 const addDepartment = async () => {
     try {
         console.log('Add Department');
@@ -214,6 +219,7 @@ const addDepartment = async () => {
     }
 }
 
+// Add a new role
 const addRole = async () => {
     try {
         console.log('Add Role');
@@ -251,7 +257,7 @@ const addRole = async () => {
             };
         }
 
-        let result = await connection.query('INSERT INTO role SET ?', {
+        let result = await connection.query('INSERT INTO employee_role SET ?', {
             title: answer.title,
             salary: answer.salary,
             department_id: answer.departmentId
@@ -265,6 +271,7 @@ const addRole = async () => {
     };
 }
 
+// Update role for specific employee
 const updateEmployee = async () => {
     try {
         console.log('Update employee');
@@ -277,7 +284,7 @@ const updateEmployee = async () => {
                 type: 'list',
                 choices: employees.map((employeeName) => {
                     return {
-                        name: employeeName.first_name + ' ' + employeeName.lastName,
+                        name: employeeName.first_name + ' ' + employeeName.last_name,
                         value: employeeName.id
                     }
                 }),
@@ -285,7 +292,7 @@ const updateEmployee = async () => {
             }
         ]);
 
-        let roles = await connection.query('SELECT * FROM role');
+        let roles = await connection.query('SELECT * FROM employee_role');
 
         let selectRole = await inquirer.prompt([
             {
